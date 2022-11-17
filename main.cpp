@@ -128,8 +128,9 @@ int main()
     ofstream out_file_inequal("inequal.csv", ios::out);
     out_file_inequal << "file1" << ',' << "file2" << endl;
     out_file_inequal.close();
-
-    input_path = "/home/njucs/Desktop/input";
+    cout << "input path:";
+    cin >> input_path;
+    //input_path = "/home/njucs/Desktop/input";
     DIR *input_Dir;
     if (!(input_Dir = opendir(input_path.c_str())))
         cout << "Folder doesn't Exist!" << endl;
