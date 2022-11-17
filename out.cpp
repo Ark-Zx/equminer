@@ -7,10 +7,10 @@ void Output::OutFile()
     {
         if (eqvec[i]->IsEqual())
 
-            out1 << eqvec[i]->file1() << "," << eqvec[i]->file2() << endl;
+            out1 << eqvec[i]->file1().erase(0,len) << "," << eqvec[i]->file2().erase(0,len) << endl;
         else
 
-            out2 << eqvec[i]->file1() << "," << eqvec[i]->file2() << endl;
+            out2 << eqvec[i]->file1().erase(0,len) << "," << eqvec[i]->file2().erase(0,len) << endl;
     }
     out1.close();
     out2.close();

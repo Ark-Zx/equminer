@@ -1,11 +1,11 @@
-#include"out.h"
-#include<cstring>
-#include<vector>
+#include "out.h"
+#include <cstring>
+#include <vector>
 using namespace std;
 string input_path;
 vector<Input *> cppvec;
 vector<Stdin *> stdvec;
-vector<Equminer*>eqvec;
+vector<Equminer *> eqvec;
 string folder;
 string pdir;
 void stdin_format()
@@ -111,7 +111,7 @@ void input()
         while ((cpp = readdir(curdir)) != NULL)
         {
             name = cpp->d_name;
-            if (name.find(".cpp")!=string::npos)
+            if (name.find(".cpp") != string::npos)
             {
                 Input *f = new Input(pdir, name);
                 cppvec.push_back(f);
@@ -128,7 +128,7 @@ int main()
     ofstream out_file_inequal("inequal.csv", ios::out);
     out_file_inequal << "file1" << ',' << "file2" << endl;
     out_file_inequal.close();
-    
+
     input_path = "/home/njucs/Desktop/input";
     DIR *input_Dir;
     if (!(input_Dir = opendir(input_path.c_str())))
@@ -145,16 +145,16 @@ int main()
                 stdin_format();
                 input();
                 for (int i = 0; i < cppvec.size() - 1; ++i)
-                cout<<cppvec[i]->path()<<endl;
-                for (int i = 0; i < cppvec.size() - 1; ++i)
                 {
                     for (int j = i + 1; j < cppvec.size(); ++j)
                     {
-                        Equminer *eq=new Equminer(cppvec[i],cppvec[j],stdvec);
-                        for(int i=0;i<10;++i)
+                        Equminer *eq = new Equminer(cppvec[i], cppvec[j], stdvec);
+                        for (int i = 0; i < 10; ++i)
                         {
                             eq->randCase();
                             eq->testEqual();
+                            if (!eq->IsEqual())
+                                break;
                         }
                         eqvec.push_back(eq);
                     }
@@ -166,7 +166,7 @@ int main()
         }
         closedir(input_Dir);
     }
-    Output*out=new Output(eqvec);
+    Output *out = new Output(eqvec,input_path.size());
     out->OutFile();
     return 0;
 }
